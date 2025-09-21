@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import BaseUrl from "../services/api";
 
 function CustomerDetailPage() {
   const { id } = useParams();
@@ -9,7 +10,7 @@ function CustomerDetailPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/customers/${id}`)
+      .get(`${BaseUrl}/api/customers/${id}`)
       .then((res) => setCustomer(res.data))
       .catch((err) => console.error(err));
   }, [id]);
@@ -17,7 +18,7 @@ function CustomerDetailPage() {
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this customer?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/customers/${id}`);
+      await axios.delete(`${BaseUrl}/api/customers/${id}`);
       navigate("/");
     } catch (err) {
       console.error("Error deleting customer:", err);

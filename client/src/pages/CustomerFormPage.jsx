@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import BaseUrl from "../services/api";
 
 function CustomerFormPage() {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ function CustomerFormPage() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/customers", formData);
+      const res = await axios.post(`${BaseUrl}/api/customers`, formData);
       setMessage("✅ Customer added successfully!");
       setTimeout(() => navigate(`/customers/${res.data.id}`), 1000);
     } catch (err) {

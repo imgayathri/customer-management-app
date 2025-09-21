@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import BaseUrl from "../services/api";
 
 function CustomerEditPage() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ function CustomerEditPage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/customers/${id}`)
+      .get(`${BaseUrl}/api/customers/${id}`)
       .then((res) => setFormData(res.data))
       .catch((err) => console.error(err));
   }, [id]);
@@ -25,7 +26,7 @@ function CustomerEditPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/customers/${id}`, formData);
+      await axios.put(`${BaseUrl}/api/customers/${id}`, formData);
       setMessage("✅ Customer updated!");
       setTimeout(() => navigate(`/customers/${id}`), 1000);
     } catch {

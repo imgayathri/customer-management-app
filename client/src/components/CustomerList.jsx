@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 function CustomerList({ customers }) {
   return (
     <table border="1" cellPadding="8">

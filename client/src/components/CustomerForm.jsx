@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function CustomerForm({ formData, onChange, onSubmit }) {
   return (
     <form onSubmit={onSubmit}>

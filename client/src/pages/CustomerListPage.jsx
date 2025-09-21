@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Form, Toast, ToastContainer } from "react-bootstrap";
+import BaseUrl from "../services/api";
 
 function CustomerListPage() {
   const [customers, setCustomers] = useState([]);
@@ -35,7 +36,7 @@ function CustomerListPage() {
 
   const fetchCustomers = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/customers");
+      const res = await fetch(`${BaseUrl}/api/customers`);
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       if (Array.isArray(data)) setCustomers(data);
@@ -53,7 +54,7 @@ function CustomerListPage() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this customer?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/customers/${id}`, {
+      const res = await fetch(`${BaseUrl}/api/customers/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete customer");
@@ -77,7 +78,7 @@ function CustomerListPage() {
     if (!selectedCustomer) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/customers/${selectedCustomer.id}`,
+        `${BaseUrl}/api/customers/${selectedCustomer.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -108,7 +109,7 @@ function CustomerListPage() {
   // ---------- ADD CUSTOMER ----------
   const handleAdd = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/customers/", {
+      const res = await fetch(`${BaseUrl}/api/customers/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -151,7 +152,7 @@ function CustomerListPage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/customers/${selectedCustomer.id}/addresses`,
+        `${BaseUrl}/api/customers/${selectedCustomer.id}/addresses`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import BaseUrl from "../services/api";
 
 function AddressForm({ customerId }) {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ function AddressForm({ customerId }) {
     e.preventDefault();
     try {
       await axios.post(
-        `http://localhost:5000/api/customers/${customerId}/addresses`,
+        `${BaseUrl}/api/customers/${customerId}/addresses`,
         formData
       );
 
